@@ -9,6 +9,9 @@ HOME_PATH=$(cygpath -m ~)
 echo 'export PATH=/clang32/bin:$PATH' >> ~/.$(basename $SHELL)rc
 . ~/.$(basename $SHELL)rc
 
+rm -rf /clang64
+ln -sf /clang32 /clang64
+
 git clone https://github.com/wxWidgets/wxWidgets
 cd wxWidgets
 git submodule update --init
@@ -18,7 +21,8 @@ cd build-release
 cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
          -DwxBUILD_DEBUG_LEVEL=0                                        \
          -DwxBUILD_MONOLITHIC=1 -DwxBUILD_SAMPLES=SOME -DwxUSE_STL=1    \
-         -DCMAKE_INSTALL_PREFIX=$HOME/root
+         -DCMAKE_INSTALL_PREFIX=$HOME/root                              \
+         -Wno-unused-command-line-argument
 mingw32-make -j$(nproc)
 
 git clone https://github.com/eranif/wx-config-msys2.git
@@ -36,7 +40,7 @@ cd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" DCMAKE_INSTALL_PREFIX=$HOME/codelite -Wno-dev
+cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DCMAKE_INSTALL_PREFIX=$HOME/codelite -Wno-dev
 mingw32-make -j$(nproc) install
 
 7zr a -mx9 -mqs=on -mmt=on ~/${NAME}.7z ~/codelite
