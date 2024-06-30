@@ -4,7 +4,7 @@ set -eux
 
 BUILD_DATE=20240630
 NAME=CodeLite-build${BUILD_DATE}
-HOME=$(cygpath -m ~)
+HOME_PATH=$(cygpath -m ~)
 
 echo 'export PATH=/clang32/bin:$PATH' >> ~/.$(basename $SHELL)rc
 . ~/.$(basename $SHELL)rc
@@ -42,7 +42,7 @@ mingw32-make -j$(nproc) install
 7zr a -mx9 -mqs=on -mmt=on ~/${NAME}.7z ~/codelite
 
 if [[ -v GITHUB_WORKFLOW ]]; then
-  echo "OUTPUT_BINARY=${HOME}/${NAME}.7z" >> $GITHUB_OUTPUT
+  echo "OUTPUT_BINARY=${HOME_PATH}/${NAME}.7z" >> $GITHUB_OUTPUT
   echo "RELEASE_NAME=${NAME}" >> $GITHUB_OUTPUT
   echo "BUILD_DATE=${BUILD_DATE}" >> $GITHUB_OUTPUT
   echo "OUTPUT_NAME=${NAME}.7z" >> $GITHUB_OUTPUT
