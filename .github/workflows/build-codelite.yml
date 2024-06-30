@@ -24,6 +24,13 @@ jobs:
            mingw-w64-clang-i686-jq            
            mingw-w64-clang-i686-libxml2       
            unzip
+           mingw-w64-clang-i686-zlib    
+           mingw-w64-clang-i686-libssh   
+           mingw-w64-clang-i686-hunspell 
+           mingw-w64-clang-i686-openssl  
+           mingw-w64-clang-i686-sqlite3  
+           flex
+           bison
 
       - name: Build CodeLite
         shell: msys2 {0}
