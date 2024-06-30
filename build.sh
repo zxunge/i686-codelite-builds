@@ -28,7 +28,7 @@ cd $_
 cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/root"
 mingw32-make -j$(nproc) install
 
-export PATH=~/root/bin/:$PATH
+export PATH=$HOME/root/bin/:$PATH
 export MSYS2_BASE=/D/msys64
 
 git clone https://github.com/eranif/codelite.git
@@ -36,7 +36,7 @@ cd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" DCMAKE_INSTALL_PREFIX=~/codelite -Wno-dev
+cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" DCMAKE_INSTALL_PREFIX=$HOME/codelite -Wno-dev
 mingw32-make -j$(nproc) install
 
 7zr a -mx9 -mqs=on -mmt=on ~/${NAME}.7z ~/codelite
