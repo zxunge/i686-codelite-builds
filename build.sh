@@ -9,7 +9,7 @@ HOME_PATH=$(cygpath -m ~)
 echo 'export PATH=/clang32/bin:$PATH' >> ~/.$(basename $SHELL)rc
 . ~/.$(basename $SHELL)rc
 
-cp -rf /clang32/* /clang64/*
+cp -rf /clang32/* /clang64/
 
 git clone https://github.com/wxWidgets/wxWidgets
 pushd wxWidgets
