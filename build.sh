@@ -25,7 +25,12 @@ cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
 mingw32-make -j$(nproc) install
 popd
 
-pushd $HOME/root/
+pushd $HOME/root/lib
+mkdir -p clang_x64_dll
+cp -rf clang_dll/* clang_x64_dll/
+popd
+
+pushd $HOME/root/bin
 ls
 popd
 
