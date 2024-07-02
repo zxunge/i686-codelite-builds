@@ -31,6 +31,7 @@ jobs:
            mingw-w64-clang-i686-sqlite3  
            flex
            bison
+           p7zip
 
       - name: Build CodeLite
         shell: msys2 {0}
