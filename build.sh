@@ -47,14 +47,15 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DCMAKE_INSTALL_PREFIX=$HOME/codelite -Wno-dev
+cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -Wno-dev
 mingw32-make -j$(nproc) install
 popd
 
 pushd codelite
 mkdir -p build-release/install/build-deps
 cp -rf $HOME/root/* build-release/install/build-deps/
-7zr a -mx9 -mqs=on -mmt=on $HOME/${NAME}.7z build-release/install/*
+cd build-release/install/
+7zr a -mx9 -mqs=on -mmt=on $HOME/${NAME}.7z ./*
 popd
 
 if [[ -v GITHUB_WORKFLOW ]]; then
