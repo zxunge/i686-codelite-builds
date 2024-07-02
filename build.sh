@@ -51,8 +51,11 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DC
 mingw32-make -j$(nproc) install
 popd
 
-cp -rf $HOME/root/* $HOME/codelite/build-deps/
-7zr a -mx9 -mqs=on -mmt=on $HOME/${NAME}.7z $HOME/codelite
+pushd codelite
+mkdir -p build-release/install/build-deps
+cp -rf $HOME/root/* build-release/install/build-deps/
+7zr a -mx9 -mqs=on -mmt=on $HOME/${NAME}.7z build-release/install/*
+popd
 
 if [[ -v GITHUB_WORKFLOW ]]; then
   echo "OUTPUT_BINARY=${HOME_PATH}/${NAME}.7z" >> $GITHUB_OUTPUT
