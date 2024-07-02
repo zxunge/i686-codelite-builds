@@ -2,14 +2,14 @@
 
 set -eux
 
-BUILD_DATE=20240630
+BUILD_DATE=20240702
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
 echo 'export PATH=/clang32/bin:$PATH' >> ~/.$(basename $SHELL)rc
 . ~/.$(basename $SHELL)rc
 
-ln -sf /clang32 /clang64
+cp -rf /clang32/* /clang64/*
 
 git clone https://github.com/wxWidgets/wxWidgets
 pushd wxWidgets
@@ -21,11 +21,11 @@ cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
          -DwxBUILD_DEBUG_LEVEL=0                                        \
          -DwxBUILD_MONOLITHIC=1 -DwxBUILD_SAMPLES=SOME -DwxUSE_STL=1    \
          -DCMAKE_INSTALL_PREFIX=$HOME/root                              \
-         -Wno-unused-command-line-argument
+         -DCMAKE_CXX_FLAGS=-Wno-unused-command-line-argument
 mingw32-make -j$(nproc)
 popd
 
-pushd wxWidgets/lib
+pushd $HOME/root/
 ls
 popd
 
@@ -45,7 +45,7 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DCMAKE_INSTALL_PREFIX=$HOME/codelite -Wno-dev
+cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DCMAKE_INSTALL_PREFIX=~/codelite -Wno-dev
 mingw32-make -j$(nproc) install
 popd
 
