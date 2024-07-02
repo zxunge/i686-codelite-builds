@@ -43,9 +43,10 @@ mingw32-make -j$(nproc) install
 popd
 
 export PATH=$HOME/root/bin/:$PATH
-export MSYS2_BASE=/D/msys64
+export MSYS2_BASE=/D/msys64/
 
 git clone https://github.com/eranif/codelite.git
+cp -f winprocess_impl.cpp codelite/CodeLite/
 pushd codelite
 git submodule update --init --recursive
 mkdir build-release
