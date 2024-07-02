@@ -30,10 +30,6 @@ mkdir -p clang_x64_dll
 cp -rf clang_dll/* clang_x64_dll/
 popd
 
-pushd $HOME/root/bin
-ls
-popd
-
 git clone https://github.com/eranif/wx-config-msys2.git
 pushd wx-config-msys2
 mkdir build-release
@@ -51,11 +47,12 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DCMAKE_INSTALL_PREFIX=~/codelite -Wno-dev
+cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DCMAKE_INSTALL_PREFIX=$HOME/codelite -Wno-dev
 mingw32-make -j$(nproc) install
 popd
 
-7zr a -mx9 -mqs=on -mmt=on ~/${NAME}.7z ~/codelite
+cp -rf $HOME/root/* $HOME/codelite/build-deps/
+7zr a -mx9 -mqs=on -mmt=on $HOME/${NAME}.7z $HOME/codelite
 
 if [[ -v GITHUB_WORKFLOW ]]; then
   echo "OUTPUT_BINARY=${HOME_PATH}/${NAME}.7z" >> $GITHUB_OUTPUT
