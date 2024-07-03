@@ -2,7 +2,7 @@
 
 set -eux
 
-BUILD_DATE=20240702
+BUILD_DATE=20240703
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
@@ -53,6 +53,7 @@ popd
 
 pushd codelite
 mkdir -p build-release/install/build-deps
+rm -rf $HOME/root/lib/clang_x64_dll
 cp -rf $HOME/root/* build-release/install/build-deps/
 cd build-release/install/
 7zr a -mx9 -mqs=on -mmt=on $HOME/${NAME}.7z ./*
