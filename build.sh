@@ -21,7 +21,8 @@ cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
          -DwxBUILD_DEBUG_LEVEL=0                                        \
          -DwxBUILD_MONOLITHIC=1 -DwxBUILD_SAMPLES=SOME -DwxUSE_STL=1    \
          -DCMAKE_INSTALL_PREFIX=$HOME/root                              \
-         -DCMAKE_CXX_FLAGS=-Wno-unused-command-line-argument
+         -DCMAKE_CXX_FLAGS=-Wno-unused-command-line-argument            \
+         -DCMAKE_C_FLAGS=-Wno-unused-command-line-argument
 mingw32-make -j$(nproc) install
 popd
 
