@@ -2,7 +2,7 @@
 
 set -eux
 
-BUILD_DATE=20240703
+BUILD_DATE=20240706
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
