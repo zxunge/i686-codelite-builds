@@ -1,6 +1,9 @@
 name: Build i686 versions of CodeLite
 
-on: workflow_dispatch
+on: 
+  push:
+    branches:
+      main
 
 jobs:
   build:
