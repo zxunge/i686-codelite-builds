@@ -54,8 +54,10 @@ popd
 
 pushd codelite
 mkdir -p build-release/install/build-deps
+mkdir -p build-release/install/locale
 rm -rf $HOME/root/lib/clang_x64_dll
 cp -rf $HOME/root/* build-release/install/build-deps/
+cp -rf ./translations/* build-release/install/locale/
 cd build-release/install/
 7zr a -mx9 -mqs=on -mmt=on $HOME/${NAME}.7z ./*
 popd
