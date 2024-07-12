@@ -43,7 +43,7 @@ export PATH=$HOME/root/bin/:$PATH
 export MSYS2_BASE=/D/msys64/
 
 git clone https://github.com/eranif/codelite.git
-cp -f winprocess_impl.cpp codelite/CodeLite/
+cp -f winprocess_impl.cpp codelite/CodeLite/AsyncProcess/
 pushd codelite
 git submodule update --init --recursive
 mkdir build-release
