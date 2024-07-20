@@ -48,7 +48,7 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DWITH_POSIX_LAYOUT -Wno-dev
+cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DWITH_POSIX_LAYOUT=1 -Wno-dev
 mingw32-make -j$(nproc) install
 popd
 
