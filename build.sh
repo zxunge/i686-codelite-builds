@@ -2,7 +2,7 @@
 
 set -eux
 
-BUILD_DATE=20240720-d1ff88d
+BUILD_DATE=20240720-d1ff88d-posix-layout
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
@@ -48,7 +48,7 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -Wno-dev
+cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DWITH_POSIX_LAYOUT -Wno-dev
 mingw32-make -j$(nproc) install
 popd
 
