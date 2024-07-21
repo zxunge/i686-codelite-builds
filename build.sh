@@ -19,18 +19,24 @@ mkdir build-release
 cd build-release
 cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
          -DwxBUILD_DEBUG_LEVEL=0                                        \
-         -DwxBUILD_MONOLITHIC=1 -DwxUSE_STL=1    \
+         -DwxBUILD_MONOLITHIC=1 -DwxUSE_STL=1                           \
          -DCMAKE_INSTALL_PREFIX=$HOME/root                              \
          -DCMAKE_CXX_FLAGS=-Wno-unused-command-line-argument            \
          -DCMAKE_C_FLAGS=-Wno-unused-command-line-argument
 mingw32-make -j$(nproc) install
 popd
 
+pushd $HOME/root/lib
+mkdir -p clang_x64_dll
+cp -rf clang_dll/* clang_x64_dll/
+popd
+
 git clone https://github.com/eranif/wx-config-msys2.git
 pushd wx-config-msys2
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/root"
+cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" \
+         -DCMAKE_INSTALL_PREFIX="$HOME/root"
 mingw32-make -j$(nproc) install
 popd
 
@@ -43,13 +49,18 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DWXCFG="clang_dll/mswu" -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DCMAKE_CXX_FLAGS=-Wno-ignored-attributes -DCMAKE_C_FLAGS=-Wno-ignored-attributes -DWITH_POSIX_LAYOUT=ON -Wno-dev
+cmake .. -DWXCFG="clang_dll/mswu" -DCMAKE_BUILD_TYPE=Release \
+         -G"MinGW Makefiles" -DWXWIN="$HOME/root"            \
+         -DCMAKE_CXX_FLAGS=-Wno-ignored-attributes           \
+         -DCMAKE_C_FLAGS=-Wno-ignored-attributes             \
+         -DWITH_POSIX_LAYOUT=ON -Wno-dev
 mingw32-make -j$(nproc) install
 popd
 
 pushd codelite
 mkdir -p build-release/install/build-deps
 mkdir -p build-release/install/locale
+rm -rf $HOME/root/lib/clang_x64_dll
 cp -rf $HOME/root/* build-release/install/build-deps/
 cp -rf ./translations/* build-release/install/locale/
 cd build-release/install/
