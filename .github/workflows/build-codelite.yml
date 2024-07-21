@@ -27,7 +27,7 @@ jobs:
            mingw-w64-clang-i686-libffi        
            mingw-w64-clang-i686-jq            
            mingw-w64-clang-i686-libxml2       
-           unzip
+           mingw-w64-clang-i686-dlfcn
            mingw-w64-clang-i686-zlib    
            mingw-w64-clang-i686-libssh   
            mingw-w64-clang-i686-hunspell 
@@ -36,6 +36,7 @@ jobs:
            flex
            bison
            p7zip
+           unzip
 
       - name: Build CodeLite
         shell: msys2 {0}
