@@ -2,7 +2,7 @@
 
 set -eux
 
-BUILD_DATE=20240720-d1ff88d-posix-layout
+BUILD_DATE=20240721-86326fa-posix-layout
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
@@ -26,11 +26,6 @@ cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
 mingw32-make -j$(nproc) install
 popd
 
-pushd $HOME/root/lib
-mkdir -p clang_x64_dll
-cp -rf clang_dll/* clang_x64_dll/
-popd
-
 git clone https://github.com/eranif/wx-config-msys2.git
 pushd wx-config-msys2
 mkdir build-release
@@ -39,8 +34,8 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DCMAKE_INSTALL_PREFIX="
 mingw32-make -j$(nproc) install
 popd
 
-export PATH=$HOME/root/bin/:$PATH
-export MSYS2_BASE=/D/msys64/
+export PATH=$HOME/root/bin:$PATH
+export MSYS2_BASE=/d/msys64
 
 git clone https://github.com/eranif/codelite.git
 cp -f winprocess_impl.cpp codelite/CodeLite/AsyncProcess/
@@ -48,14 +43,13 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DWITH_POSIX_LAYOUT=1 -Wno-dev
+cmake .. -DWXCFG="clang_dll/mswu" -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" -DWXWIN="$HOME/root" -DWITH_POSIX_LAYOUT=ON -Wno-dev
 mingw32-make -j$(nproc) install
 popd
 
 pushd codelite
 mkdir -p build-release/install/build-deps
 mkdir -p build-release/install/locale
-rm -rf $HOME/root/lib/clang_x64_dll
 cp -rf $HOME/root/* build-release/install/build-deps/
 cp -rf ./translations/* build-release/install/locale/
 cd build-release/install/
