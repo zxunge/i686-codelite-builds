@@ -2,7 +2,7 @@
 
 set -eux
 
-BUILD_DATE=20240721-86326fa-posix-layout
+BUILD_DATE=20240721-4399c05
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
@@ -53,7 +53,7 @@ cmake .. -DWXCFG="clang_dll/mswu" -DCMAKE_BUILD_TYPE=Release \
          -G"MinGW Makefiles" -DWXWIN="$HOME/root"            \
          -DCMAKE_CXX_FLAGS=-Wno-ignored-attributes           \
          -DCMAKE_C_FLAGS=-Wno-ignored-attributes             \
-         -DWITH_POSIX_LAYOUT=ON -Wno-dev
+         -Wno-dev
 mingw32-make -j$(nproc) install
 popd
 
