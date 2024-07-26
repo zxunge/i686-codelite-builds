@@ -2,7 +2,7 @@
 
 set -eux
 
-BUILD_DATE=20240723-79b5ae5
+BUILD_DATE=20240726-639d2db-debug
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
@@ -17,8 +17,8 @@ git submodule update --init
 
 mkdir build-release
 cd build-release
-cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
-         -DwxBUILD_DEBUG_LEVEL=0                                        \
+cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug                   \
+         -DwxBUILD_DEBUG_LEVEL=1                                        \
          -DwxBUILD_MONOLITHIC=1 -DwxUSE_STL=1                           \
          -DCMAKE_INSTALL_PREFIX=$HOME/root                              \
          -DCMAKE_CXX_FLAGS=-Wno-unused-command-line-argument            \
@@ -49,7 +49,7 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DWXCFG="clang_dll/mswu" -DCMAKE_BUILD_TYPE=Release \
+cmake .. -DWXCFG="clang_dll/mswud" -DCMAKE_BUILD_TYPE=Debug   \
          -G"MinGW Makefiles" -DWXWIN="$HOME/root"            \
          -DCMAKE_CXX_FLAGS=-Wno-ignored-attributes           \
          -DCMAKE_C_FLAGS=-Wno-ignored-attributes             \
