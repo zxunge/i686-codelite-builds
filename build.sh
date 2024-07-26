@@ -29,6 +29,7 @@ popd
 pushd $HOME/root/lib
 mkdir -p clang_x64_dll
 cp -rf clang_dll/* clang_x64_dll/
+cp -rf clang_dll/wxmsw330ud_clang_custom.dll clang_x64_dll/wxmsw330u_clang_custom.dll
 popd
 
 git clone https://github.com/eranif/wx-config-msys2.git
