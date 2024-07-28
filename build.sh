@@ -2,7 +2,7 @@
 
 set -eux
 
-BUILD_DATE=20240726-639d2db-debug
+BUILD_DATE=20240728-43fbfb3
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
@@ -17,8 +17,8 @@ git submodule update --init
 
 mkdir build-release
 cd build-release
-cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug                   \
-         -DwxBUILD_DEBUG_LEVEL=1                                        \
+cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
+         -DwxBUILD_DEBUG_LEVEL=0                                        \
          -DwxBUILD_MONOLITHIC=1 -DwxUSE_STL=1                           \
          -DCMAKE_INSTALL_PREFIX=$HOME/root                              \
          -DCMAKE_CXX_FLAGS=-Wno-unused-command-line-argument            \
@@ -29,7 +29,7 @@ popd
 pushd $HOME/root/lib
 mkdir -p clang_x64_dll
 cp -rf clang_dll/* clang_x64_dll/
-cp -rf clang_dll/wxmsw330ud_clang_custom.dll clang_x64_dll/wxmsw330u_clang_custom.dll
+# cp -rf clang_dll/wxmsw330ud_clang_custom.dll clang_x64_dll/wxmsw330u_clang_custom.dll
 popd
 
 git clone https://github.com/eranif/wx-config-msys2.git
@@ -50,10 +50,10 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DWXCFG="clang_dll/mswud" -DCMAKE_BUILD_TYPE=Debug   \
-         -G"MinGW Makefiles" -DWXWIN="$HOME/root"            \
-         -DCMAKE_CXX_FLAGS=-Wno-ignored-attributes           \
-         -DCMAKE_C_FLAGS=-Wno-ignored-attributes             \
+cmake .. -DWXCFG="clang_dll/mswu" -DCMAKE_BUILD_TYPE=Release  \
+         -G"MinGW Makefiles" -DWXWIN="$HOME/root"             \
+         -DCMAKE_CXX_FLAGS=-Wno-ignored-attributes            \
+         -DCMAKE_C_FLAGS=-Wno-ignored-attributes              \
          -Wno-dev
 mingw32-make -j$(nproc) install
 popd
