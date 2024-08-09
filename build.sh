@@ -13,6 +13,7 @@ cp -rf /clang32/* /clang64/
 
 git clone https://github.com/wxWidgets/wxWidgets
 pushd wxWidgets
+git checkout 3737245
 git submodule update --init
 
 mkdir build-release
