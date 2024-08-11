@@ -13,7 +13,6 @@ cp -rf /clang32/* /clang64/
 
 git clone https://github.com/wxWidgets/wxWidgets
 pushd wxWidgets
-# git checkout 3737245
 git submodule update --init
 
 mkdir build-release
@@ -46,7 +45,6 @@ export PATH=$HOME/root/bin:$PATH
 export MSYS2_BASE=/d/msys64
 
 git clone https://github.com/eranif/codelite.git
-cp -f winprocess_impl.cpp codelite/CodeLite/AsyncProcess/
 pushd codelite
 git submodule update --init --recursive
 mkdir build-release
