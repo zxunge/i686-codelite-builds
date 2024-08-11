@@ -2,7 +2,7 @@
 
 set -eux
 
-BUILD_DATE=20240807-1e601a5
+BUILD_DATE=202408011-bb9c89b
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
@@ -13,7 +13,7 @@ cp -rf /clang32/* /clang64/
 
 git clone https://github.com/wxWidgets/wxWidgets
 pushd wxWidgets
-git checkout 3737245
+# git checkout 3737245
 git submodule update --init
 
 mkdir build-release
