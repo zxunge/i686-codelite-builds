@@ -53,17 +53,18 @@ cmake .. -DWXCFG="clang_dll/mswu" -DCMAKE_BUILD_TYPE=Release  \
          -G"MinGW Makefiles" -DWXWIN="$HOME/root"             \
          -DCMAKE_CXX_FLAGS=-Wno-ignored-attributes            \
          -DCMAKE_C_FLAGS=-Wno-ignored-attributes              \
+         -DCMAKE_INSTALL_PREFIX=/opt/codelite                 \
          -Wno-dev
 mingw32-make -j$(nproc) install
 popd
 
 pushd codelite
-mkdir -p build-release/install/build-deps
-mkdir -p build-release/install/locale
+mkdir -p /opt/codelite/build-deps
+mkdir -p /opt/codelite/locale
 rm -rf $HOME/root/lib/clang_x64_dll
-cp -rf $HOME/root/* build-release/install/build-deps/
-cp -rf ./translations/* build-release/install/locale/
-cd build-release/install/
+cp -rf $HOME/root/* /opt/codelite/build-deps/
+cp -rf ./translations/* /opt/codelite/locale/
+cd /opt/codelite/
 7zr a -mx9 -mqs=on -mmt=on $HOME/${NAME}.7z ./*
 popd
 
