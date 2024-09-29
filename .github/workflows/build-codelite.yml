@@ -17,7 +17,7 @@ jobs:
          update: true
          location: D:\
          msystem: clang32
-         install: >-
+         install: >-         # mingw-w64-clang-i686-jq
            git
            openssh                              
            mingw-w64-clang-i686-gdb  
@@ -25,8 +25,7 @@ jobs:
            mingw-w64-clang-i686-toolchain     
            mingw-w64-clang-i686-python3       
            mingw-w64-clang-i686-cmake         
-           mingw-w64-clang-i686-libffi        
-           mingw-w64-clang-i686-jq            
+           mingw-w64-clang-i686-libffi                    
            mingw-w64-clang-i686-libxml2       
            mingw-w64-clang-i686-dlfcn
            mingw-w64-clang-i686-zlib    
