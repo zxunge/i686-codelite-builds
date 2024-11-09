@@ -17,10 +17,10 @@ git submodule update --init
 
 mkdir build-release
 cd build-release
-cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
+cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                \
          -DwxBUILD_DEBUG_LEVEL=0                                        \
          -DwxBUILD_MONOLITHIC=1 -DwxUSE_STL=1                           \
-         -DCMAKE_INSTALL_PREFIX=$HOME/root                              \
+         -DCMAKE_INSTALL_PREFIX=$HOME/root                              
 mingw32-make -j$(nproc) install
 popd
 
@@ -34,7 +34,7 @@ git clone https://github.com/eranif/wx-config-msys2.git
 pushd wx-config-msys2
 mkdir build-release
 cd $_
-cmake .. -DCMAKE_BUILD_TYPE=Release -G"MinGW Makefiles" \
+cmake .. -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" \
          -DCMAKE_INSTALL_PREFIX="$HOME/root"
 mingw32-make -j$(nproc) install
 popd
@@ -48,7 +48,7 @@ git submodule update --init --recursive
 mkdir build-release
 cd $_
 cmake .. -DWXCFG="gcc_dll/mswu" -DCMAKE_BUILD_TYPE=Release  \
-         -G"MinGW Makefiles" -DWXWIN="$HOME/root"             \
+         -G "MinGW Makefiles" -DWXWIN="$HOME/root"          \
          -Wno-dev
 mingw32-make -j$(nproc) install
 popd
