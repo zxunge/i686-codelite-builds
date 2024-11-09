@@ -6,10 +6,10 @@ BUILD_DATE=20241109-23e5b42
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
-echo 'export PATH=/clang32/bin:$PATH' >> ~/.$(basename $SHELL)rc
+echo 'export PATH=/mingw32/bin:$PATH' >> ~/.$(basename $SHELL)rc
 . ~/.$(basename $SHELL)rc
 
-cp -rf /clang32/* /clang64/
+cp -rf /mingw32/* /clang64/
 
 git clone https://github.com/wxWidgets/wxWidgets
 pushd wxWidgets
@@ -21,15 +21,13 @@ cmake .. -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                 \
          -DwxBUILD_DEBUG_LEVEL=0                                        \
          -DwxBUILD_MONOLITHIC=1 -DwxUSE_STL=1                           \
          -DCMAKE_INSTALL_PREFIX=$HOME/root                              \
-         -DCMAKE_CXX_FLAGS=-Wno-unused-command-line-argument            \
-         -DCMAKE_C_FLAGS=-Wno-unused-command-line-argument
 mingw32-make -j$(nproc) install
 popd
 
 pushd $HOME/root/lib
-mkdir -p clang_x64_dll
-cp -rf clang_dll/* clang_x64_dll/
-# cp -rf clang_dll/wxmsw330ud_clang_custom.dll clang_x64_dll/wxmsw330u_clang_custom.dll
+mkdir -p gcc_x64_dll
+cp -rf gcc_dll/* gcc_x64_dll/
+# cp -rf gcc_dll/wxmsw330ud_clang_custom.dll gcc_x64_dll/wxmsw330u_clang_custom.dll
 popd
 
 git clone https://github.com/eranif/wx-config-msys2.git
@@ -51,8 +49,6 @@ mkdir build-release
 cd $_
 cmake .. -DWXCFG="clang_dll/mswu" -DCMAKE_BUILD_TYPE=Release  \
          -G"MinGW Makefiles" -DWXWIN="$HOME/root"             \
-         -DCMAKE_CXX_FLAGS=-Wno-ignored-attributes            \
-         -DCMAKE_C_FLAGS=-Wno-ignored-attributes              \
          -Wno-dev
 mingw32-make -j$(nproc) install
 popd
@@ -60,7 +56,7 @@ popd
 pushd codelite
 mkdir -p build-release/install/build-deps
 mkdir -p build-release/install/locale
-rm -rf $HOME/root/lib/clang_x64_dll
+rm -rf $HOME/root/lib/gcc_x64_dll
 cp -rf $HOME/root/* build-release/install/build-deps/
 cp -rf ./translations/* build-release/install/locale/
 cd build-release/install/
