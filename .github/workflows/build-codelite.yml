@@ -16,20 +16,23 @@ jobs:
         with:
          update: true
          location: D:\
-         msystem: clang32
-         install: >-         # mingw-w64-clang-i686-jq
+         msystem: mingw32
+         install: >-         
            git
            openssh                              
-           mingw-w64-clang-i686-gdb  
-           mingw-w64-clang-i686-ccache
-           mingw-w64-clang-i686-toolchain     
-           mingw-w64-clang-i686-python3       
-           mingw-w64-clang-i686-cmake         
-           mingw-w64-clang-i686-libffi                    
-           mingw-w64-clang-i686-libxml2       
-           mingw-w64-clang-i686-zlib
-           mingw-w64-clang-i686-openssl  
-           mingw-w64-clang-i686-sqlite3  
+           mingw-w64-i686-gdb  
+           mingw-w64-i686-ccache
+           mingw-w64-i686-toolchain     
+           mingw-w64-i686-python3       
+           mingw-w64-i686-cmake         
+           mingw-w64-i686-libffi                    
+           mingw-w64-i686-libxml2       
+           mingw-w64-i686-zlib
+           mingw-w64-i686-openssl  
+           mingw-w64-i686-sqlite3  
+           mingw-w64-i686-libssh
+           mingw-w64-i686-dlfcn
+           mingw-w64-i686-jq
            flex
            bison
            p7zip
