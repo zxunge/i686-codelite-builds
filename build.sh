@@ -2,7 +2,7 @@
 
 set -eux
 
-BUILD_DATE=20241109-23e5b42
+BUILD_DATE=20241221-2942c92
 NAME=CodeLite-build${BUILD_DATE}
 HOME_PATH=$(cygpath -m ~)
 
@@ -20,14 +20,13 @@ cd build-release
 cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release                \
          -DwxBUILD_DEBUG_LEVEL=0                                        \
          -DwxBUILD_MONOLITHIC=1 -DwxUSE_STL=1                           \
-         -DCMAKE_C_COMPILER=clang -DCMAKE_C_COMPILER=clang++            \
          -DCMAKE_INSTALL_PREFIX=$HOME/root                              
 mingw32-make -j$(nproc) install
 popd
 
 pushd $HOME/root/lib
-mkdir -p clang_x64_dll
-cp -rf clang_dll/* clang_x64_dll/
+mkdir -p gcc_x64_dll
+cp -rf gcc_dll/* gcc_x64_dll/
 # cp -rf gcc_dll/wxmsw330ud_clang_custom.dll gcc_x64_dll/wxmsw330u_clang_custom.dll
 popd
 
@@ -36,7 +35,6 @@ pushd wx-config-msys2
 mkdir build-release
 cd $_
 cmake .. -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"      \
-         -DCMAKE_C_COMPILER=clang -DCMAKE_C_COMPILER=clang++  \
          -DCMAKE_INSTALL_PREFIX="$HOME/root"
 mingw32-make -j$(nproc) install
 popd
@@ -49,8 +47,7 @@ pushd codelite
 git submodule update --init --recursive
 mkdir build-release
 cd $_
-cmake .. -DWXCFG="clang_dll/mswu" -DCMAKE_BUILD_TYPE=Release  \
-         -DCMAKE_C_COMPILER=clang -DCMAKE_C_COMPILER=clang++  \
+cmake .. -DWXCFG="gcc_dll/mswu" -DCMAKE_BUILD_TYPE=Release  \
          -G "MinGW Makefiles" -DWXWIN="$HOME/root"            \
          -Wno-dev
 mingw32-make -j$(nproc) install
@@ -59,7 +56,7 @@ popd
 pushd codelite
 mkdir -p build-release/install/build-deps
 mkdir -p build-release/install/locale
-rm -rf $HOME/root/lib/clang_x64_dll
+rm -rf $HOME/root/lib/gcc_x64_dll
 cp -rf $HOME/root/* build-release/install/build-deps/
 cp -rf ./translations/* build-release/install/locale/
 cd build-release/install/
