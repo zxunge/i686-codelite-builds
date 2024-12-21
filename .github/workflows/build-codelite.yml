@@ -27,7 +27,8 @@ jobs:
            mingw-w64-i686-clang
            mingw-w64-i686-clang-tools-extra
            mingw-w64-i686-python3       
-           mingw-w64-i686-cmake         
+           mingw-w64-i686-cmake  
+           mingw-w64-i686-hunspell
            mingw-w64-i686-libffi                    
            mingw-w64-i686-libxml2       
            mingw-w64-i686-zlib
