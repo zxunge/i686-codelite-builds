@@ -25,8 +25,8 @@ mingw32-make -j$(nproc) install
 popd
 
 pushd $HOME/root/lib
-mkdir -p gcc_x64_dll
-cp -rf gcc_dll/* gcc_x64_dll/
+mkdir -p clang_x64_dll
+cp -rf gcc_dll/* clang_x64_dll/
 # cp -rf gcc_dll/wxmsw330ud_clang_custom.dll gcc_x64_dll/wxmsw330u_clang_custom.dll
 popd
 
@@ -57,7 +57,7 @@ popd
 pushd codelite
 mkdir -p build-release/install/build-deps
 mkdir -p build-release/install/locale
-rm -rf $HOME/root/lib/gcc_x64_dll
+rm -rf $HOME/root/lib/clang_x64_dll
 cp -rf $HOME/root/* build-release/install/build-deps/
 cp -rf ./translations/* build-release/install/locale/
 cd build-release/install/
